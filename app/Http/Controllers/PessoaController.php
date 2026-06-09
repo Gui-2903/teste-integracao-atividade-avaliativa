@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pessoa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PessoaController extends Controller
 {
@@ -30,7 +31,7 @@ class PessoaController extends Controller
                 'email' => $request->input('email'),
                 'telefone' => $request->input('telefone'),
                 'matricula' => $request->input('matricula'),
-                'password' => $request->input('password'),
+                'password' => Hash::make($request->input('password')),
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Erro ao criar a pessoa: Verifique as informações enviadas');
@@ -69,7 +70,7 @@ class PessoaController extends Controller
             $pessoaModel->matricula = $request->input('matricula', $pessoaModel->matricula);
 
             if ($request->filled('password')) {
-                $pessoaModel->password = $request->input('password');
+                $pessoaModel->password = Hash::make($request->input('password'));
             }
 
             $pessoaModel->save();
