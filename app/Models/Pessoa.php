@@ -10,16 +10,16 @@ class Pessoa extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = ['biblioteca_id', 'name', 'email', 'password', 'matricula', 'telefone'];
+    protected $fillable = ['name', 'email', 'password', 'matricula', 'telefone'];
 
     protected $hidden = ['password', 'remember_token'];
 
     /**
-     * Relacionamento com Biblioteca.
+     * Relacionamento com Bibliotecas (pivot biblioteca_pessoa).
      */
-    public function biblioteca()
+    public function bibliotecas()
     {
-        return $this->belongsTo(Biblioteca::class);
+        return $this->belongsToMany(Biblioteca::class, 'biblioteca_pessoa')->withTimestamps();
     }
 
     /**

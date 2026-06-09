@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 
 @if (session('message'))
 <div class="alert"></div>
@@ -25,3 +28,40 @@
     <button type="submit">Atualizar Biblioteca</button>
 
 </form>
+
+
+
+<hr>
+
+<h4>Pessoas</h4>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Matrícula</th>
+            <th>Bibliotecas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($biblioteca->pessoas as $pessoa)
+            <tr>
+                <td>{{ $pessoa->name }}</td>
+                <td>{{ $pessoa->email }}</td>
+                <td>{{ $pessoa->telefone }}</td>
+                <td>{{ $pessoa->matricula }}</td>
+                <td>{{ $pessoa->bibliotecas->pluck('nome')->join(', ') }}</td>
+            </tr>
+        @endforeach
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">Total de Pessoas: {{ count($biblioteca->pessoas) }}</td>
+            <td><a href="{{ route('bibliotecas.pessoas.create', ['biblioteca' => $biblioteca->id]) }}" class="btn">Adicionar Pessoa à Biblioteca</a></td>
+        </tr>
+    </tfoot>
+</table>
+
+@endsection
