@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Biblioteca;
 use App\Models\Pessoa;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class PessoaController extends Controller
@@ -27,7 +25,7 @@ class PessoaController extends Controller
 
         try {
             Pessoa::create([
-                'biblioteca_id' => $this->resolveBibliotecaId($request),
+                'biblioteca_id' => $request->input('biblioteca_id'),
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'telefone' => $request->input('telefone'),
@@ -80,27 +78,5 @@ class PessoaController extends Controller
         }
 
         return redirect()->route('pessoas.index')->with('message', 'Pessoa atualizada com sucesso!');
-    }
-
-    private function resolveBibliotecaId(Request $request): int
-    {
-        $requestedId = $request->input('biblioteca_id');
-
-        if (!empty($requestedId) && Biblioteca::where('id', $requestedId)->exists()) {
-            return (int) $requestedId;
-        }
-
-        $existingId = Biblioteca::query()->value('id');
-
-        if ($existingId) {
-            return (int) $existingId;
-        }
-
-        $user = User::factory()->create();
-
-        return (int) Biblioteca::create([
-            'created_by' => $user->id,
-            'nome' => 'Biblioteca padrão',
-        ])->id;
     }
 }
