@@ -23,6 +23,14 @@ class Pessoa extends Authenticatable
     }
 
     /**
+     * Relacionamento many-to-many com Bibliotecas.
+     */
+    public function bibliotecas()
+    {
+        return $this->belongsToMany(Biblioteca::class, 'biblioteca_pessoa');
+    }
+
+    /**
      * Get the attributes that should be cast.
      */
     protected function casts(): array

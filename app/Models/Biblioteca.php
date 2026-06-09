@@ -32,6 +32,6 @@ class Biblioteca extends Model
      */
     public function pessoas()
     {
-        return $this->hasMany(Pessoa::class);
+        return $this->belongsToMany(Pessoa::class, 'biblioteca_pessoa');
     }
 }
