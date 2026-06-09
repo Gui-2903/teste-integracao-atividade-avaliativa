@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 
 @if (session('error'))
 <div class="alert"></div>
@@ -31,3 +34,4 @@
     <button type="submit">Criar Biblioteca</button>
 
 </form>
+@endsection

@@ -28,10 +28,10 @@ class Biblioteca extends Model
     }
 
     /**
-     * Relacionamento com Pessoas.
+     * Relacionamento com Pessoas (pivot biblioteca_pessoa).
      */
     public function pessoas()
     {
-        return $this->hasMany(Pessoa::class);
+        return $this->belongsToMany(Pessoa::class, 'biblioteca_pessoa')->withTimestamps();
     }
 }

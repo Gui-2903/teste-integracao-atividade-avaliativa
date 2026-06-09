@@ -1,3 +1,53 @@
+
+# Executar ambiente localhost
+
+### Construir imagem docker
+```
+docker compose build --no-cache
+```
+
+### Iniciar todo o ambiente
+```
+docker compose up
+```
+
+### Parar todo o ambiente
+```
+docker compose down
+```
+
+### Ver logs em tempo real
+```
+docker compose logs -f app
+```
+
+### Executar command no artisan
+```
+docker compose exec app php artisan 
+<comando>
+```
+Exemplos: 
+```
+docker compose exec app php artisan migrate
+
+docker compose exec app php artisan migrate:rollback
+
+docker compose exec app php artisan db:seed
+
+docker compose exec app php artisan db:seed PessoaBibliotecaSeeder
+```
+
+
+### Cobertura de teste com xdebug
+```
+docker exec -it app_laravel bash
+XDEBUG_MODE=coverage /usr/bin/php8.4 artisan test --coverage
+```
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

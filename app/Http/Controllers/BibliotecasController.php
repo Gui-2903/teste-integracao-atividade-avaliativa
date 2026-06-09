@@ -46,7 +46,7 @@ class BibliotecasController extends Controller
 
             $biblioteca->save();
         } catch (\Exception $e) {
-            return view('bibliotecas.new', ['error' => 'Erro ao criar a biblioteca: Verifique as informações enviadas']);
+            return redirect()->route('bibliotecas.new', ['error' => 'Erro ao criar a biblioteca: Verifique as informações enviadas']);
         }
         return redirect()->route('bibliotecas.index')->with('message', 'Biblioteca criada com sucesso');
 
@@ -56,11 +56,17 @@ class BibliotecasController extends Controller
     public function edit(int $id)
     {
         //
-        $biblioteca = Biblioteca::find($id);
+
+        $users = \App\Models\User::all();
+
+        $biblioteca = Biblioteca::where('id', $id)->first();
         if (!$biblioteca) {
-            return view('bibliotecas.new', ['error' => 'Biblioteca não encontrada']);
+            return redirect()->route('bibliotecas.index')->with('error', 'Biblioteca não encontrada');
         }
-        return view('bibliotecas.new', ['biblioteca' => $biblioteca]);
+
+        // $pessoas = $biblioteca->pessoas;
+
+        return view('bibliotecas.edit', ['biblioteca' => $biblioteca, 'users' => $users]);
     }
 
 
@@ -95,7 +101,7 @@ class BibliotecasController extends Controller
 
             $biblioteca->save();
         } catch (\Exception $e) {
-            return view('bibliotecas.new', ['error' => 'Erro ao atualizar a biblioteca: Verifique as informações enviadas']);
+            return redirect()->route('bibliotecas.new', ['error' => 'Erro ao atualizar a biblioteca: Verifique as informações enviadas']);
         }
 
         return redirect()->route('bibliotecas.index')->with('message', 'Biblioteca atualizada com sucesso');
