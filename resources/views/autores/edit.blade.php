@@ -8,7 +8,7 @@
 </div>
 @endif
 
-<form action="{{ route('autores.update', ['id' => $autor->id]) }}" method="POST">
+<form action="{{ route('autores.update', ['id' => $autor->id]) }}" method="PUT">
     @csrf
     @method('PUT')
     <!-- Form fields for editing autor -->
