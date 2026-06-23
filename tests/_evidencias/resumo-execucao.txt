@@ -1,0 +1,76 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.06s  
+
+   FAIL  Tests\Feature\AutorTest
+  ✓ index lista autores                                                  8.16s  
+  ✓ formulario create responde ok                                        0.19s  
+  ✓ store cria autor valido                                              0.34s  
+  ✓ store exige nome                                                     0.24s  
+  ✓ store rejeita nome muito longo                                       0.19s  
+  ✓ store rejeita data nascimento invalida                               0.19s  
+  ⨯ store persiste data nascimento                                       0.23s  
+  ⨯ formulario edit responde ok                                         30.00s  
+  ✓ edit autor inexistente retorna 404                                   0.25s  
+  ✓ update atualiza autor valido                                         0.18s  
+  ✓ update exige nome                                                    0.19s  
+  ✓ update autor inexistente retorna 404                                 0.23s  
+
+   PASS  Tests\Feature\BibliotecaPessoaTest
+  ✓ formulario add pessoa responde ok                                    0.53s  
+  ✓ store associa pessoa a biblioteca                                    0.19s  
+  ✓ store exige pessoa id                                                0.20s  
+  ✓ store rejeita pessoa inexistente                                     0.20s  
+  ✓ store nao associa pessoa duplicada                                   0.21s  
+
+   FAIL  Tests\Feature\BibliotecaTest
+  ✓ index responde ok                                                    0.21s  
+  ✓ index busca por nome                                                 0.22s  
+  ✓ formulario create responde ok                                        0.20s  
+  ✓ store cria biblioteca valida                                         0.19s  
+  ⨯ store sem nome nao persiste e nao quebra                             5.80s  
+  ⨯ store sem created by nao persiste                                    5.88s  
+  ✓ formulario edit responde ok                                          0.22s  
+  ✓ update atualiza biblioteca                                           0.18s  
+  ✓ update biblioteca inexistente retorna 404                            0.19s  
+  ✓ destroy remove biblioteca                                            0.17s  
+  ✓ destroy biblioteca inexistente retorna 404                           0.18s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                        0.27s  
+
+   FAIL  Tests\Feature\LivroTest
+  ⨯ index responde ok                                                   29.50s  
+  ⨯ formulario create responde ok                                        5.85s  
+  ⨯ store cria livro valido                                              5.41s  
+  ⨯ store rejeita dados invalidos                                        5.49s  
+  ⨯ store rejeita autor inexistente                                      6.18s  
+  ⨯ show livro existente                                                 5.53s  
+  ⨯ update atualiza livro                                                5.36s  
+  ⨯ destroy remove livro                                                 6.56s  
+
+   FAIL  Tests\Feature\PessoaTest
+  ✓ index responde ok                                                    0.27s  
+  ✓ formulario create responde ok                                        0.30s  
+  ✓ store cria pessoa valida                                             0.29s  
+  ✓ store rejeita senhas divergentes                                     0.23s  
+  ✓ store armazena senha com hash                                        0.22s  
+  ⨯ store nao duplica email                                             14.68s  
+  ⨯ store exige email                                                   14.38s  
+  ✓ update atualiza pessoa                                               0.21s  
+  ✓ edit pessoa inexistente redireciona com erro                         0.21s  
+  ⨯ destroy remove pessoa                                                0.22s  
+
+   PASS  Tests\Feature\UserTest
+  ✓ index responde ok                                                    0.26s  
+  ✓ formulario create responde ok                                        0.25s  
+  ✓ store cria usuario valido                                            0.24s  
+  ✓ store armazena senha com hash                                        0.21s  
+  ✓ store nao duplica email                                              0.23s  
+  ✓ show usuario inexistente redireciona com erro                        0.20s  
+  ✓ update atualiza usuario                                              0.21s  
+  ✓ update usuario inexistente redireciona com erro                      0.20s  
+  ✓ destroy remove usuario                                               0.21s  
+  ✓ destroy usuario inexistente redireciona com erro                     0.20s  
+  Tests:    15 failed, 43 passed (118 assertions)
+  Duration: 166.92s
