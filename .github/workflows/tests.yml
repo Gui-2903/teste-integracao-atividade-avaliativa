@@ -1,0 +1,43 @@
+name: Testes de Integração
+
+# Executa automaticamente os testes a cada Pull Request (e em pushes nas
+# branches principais), conforme exigido pela atividade.
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+  push:
+    branches:
+      - develop
+      - test-develop
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, xml, pdo, pdo_sqlite, sqlite3, bcmath, curl, fileinfo
+          coverage: xdebug
+
+      - name: Copiar arquivo de ambiente
+        run: cp .env.example .env
+
+      - name: Instalar dependências (Composer)
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Gerar APP_KEY
+        run: php artisan key:generate
+
+      - name: Executar testes de integração com cobertura
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
+        run: php artisan test --coverage
